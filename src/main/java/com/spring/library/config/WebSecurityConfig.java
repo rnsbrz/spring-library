@@ -52,6 +52,10 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/edit").hasAuthority("ADMIN")
                 .requestMatchers("/delete").hasAuthority("ADMIN")
+                .requestMatchers("/genre").hasAuthority("ADMIN")
+                .requestMatchers("/create").hasAuthority("ADMIN")
+                .requestMatchers("/book/edit/**").hasAuthority("ADMIN")
+                .requestMatchers("/book/delete/**").hasAuthority("ADMIN")
 
         );
         http.authorizeHttpRequests(
@@ -60,7 +64,7 @@ public class WebSecurityConfig {
                 .formLogin(login -> login.loginPage("/login")
                         .failureUrl("/login?error=true")
                         .loginProcessingUrl("/loginUser")
-                        .defaultSuccessUrl("/home", true)
+                        .defaultSuccessUrl("/dashboard", true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
